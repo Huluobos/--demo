@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>翻牌</title>
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            width: 200px;
+        }
+        .card{
+            width: 200px;
+            height: 380px;
+            position: relative;
+            float: left;
+            margin: 0 10px;
+        }
+        .card .font,.card .back{
+            position: absolute;
+            left: 0;
+            top: 0;
+            backface-visibility: hidden;
+            transition: all 3s;
+        }
+        .card .font{
+            transform: rotateY(0deg)
+        }
+        .card .back{
+            transform: rotateY(180deg)
+        }
+        .card .font1{
+             transform: rotateY(180deg)
+         }
+        .card .back1{
+            transform: rotateY(0deg)
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app" class="content">
+        <div v-for="(item,index) in list" :key="index">
+            <div class="card" @click="clickHendle(index)" >
+                <div class="font"><img src="../image/1.jpg"/></div>
+                <div class="back"><img src="../image/2.jpg"/></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="../js/jquery-1.11.1.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        name: 'fanpan',
+        data(){
+            return{
+                list:[0,1,2,3,4],
+                ok:1
+            }
+        },
+        methods: {
+            clickHendle(key){
+                let that = this
+                if (that.ok==1) {
+                    $( $(".font")[key]).addClass("font1")
+                    $( $(".back")[key]).addClass("back1")
+                    console.log("点击了第" + (key+1) + "张图片")
+                    that.ok++
+               }else{
+                   console.log("已经点击了");
+               }
+            },
+
+        },
+        created(){
+            var that = this
+        },
+
+    })
+</script>
+</html>
